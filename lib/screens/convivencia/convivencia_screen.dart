@@ -30,6 +30,15 @@ class ConvivenciaScreen extends StatelessWidget {
               ),
             ),
           ),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, "comportamiento_alumno_screen"),
+            child: const Card(
+              child: ListTile(
+                leading: FaIcon(FontAwesomeIcons.braille),
+                title: Text('Comportamiento alumno'),
+              ),
+            ),
+          ),
         ],
       ),
     );
