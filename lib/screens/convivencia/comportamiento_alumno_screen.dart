@@ -32,13 +32,13 @@ class ComportamientoAlumnoScreen extends StatelessWidget {
                   children: [
                     Container(
                         width: double.infinity,
-                        height: 40,
+                        height: 30,
                         child: Center(
                             child: Text(
                           "HORA",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 25,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         )),
@@ -46,25 +46,30 @@ class ComportamientoAlumnoScreen extends StatelessWidget {
                             borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(40)),
                             color: theme.primaryColor)),
-                    createVerticalSeparator(0.035, context),
+
+                            createVerticalSeparator(5),
                     Container(
-                      decoration: BoxDecoration(color: theme.primaryColor,borderRadius: BorderRadius.all(Radius.circular(40))),
-                      width: screenSize.width*0.15,
+                        decoration: BoxDecoration(
+                            color: theme.primaryColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(40))),
+                        width: screenSize.width * 0.3,
                         child: FilledButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.calendar_month),
                           label: const Text(
                             "Fecha",
                             style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          style: const ButtonStyle(
-                            iconSize: MaterialStatePropertyAll(35),
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ))
                   ],
                 ),
               ),
+
+              createVerticalSeparator(5),
+
+
               Container(
                 width: screenSize.width * 0.9,
                 decoration: BoxDecoration(
@@ -74,13 +79,13 @@ class ComportamientoAlumnoScreen extends StatelessWidget {
                   children: [
                     Container(
                         width: double.infinity,
-                        height: 40,
+                        height: 30,
                         child: Center(
                             child: Text(
                           "HORA",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 25,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         )),
@@ -131,9 +136,9 @@ class ComportamientoAlumnoScreen extends StatelessWidget {
     );
   }
 
-  createVerticalSeparator(cuantity, context) {
+  createVerticalSeparator(cuantity) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * cuantity,
+      height: cuantity+0.0
     );
   }
 }
