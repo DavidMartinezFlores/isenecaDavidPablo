@@ -10,7 +10,7 @@ class ComportamientoAlumnoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.primaryColor,
-        title: Text("COMPORTAMIENTO_ALUMNO"),
+        title: const Text("COMPORTAMIENTO_ALUMNO"),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -25,19 +25,26 @@ class ComportamientoAlumnoScreen extends StatelessWidget {
                 height: screenSize.height * 0.2,
                 width: screenSize.width * 0.9,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
                     color: theme.secondaryHeaderColor),
                 child: Column(
                   children: [
                     Container(
-                      width: screenSize.width * 0.8,
-                      child: Text("HORA"),
+                        width: double.infinity,
+                        height: 40,
+                        child: Center(
+                            child: Text(
+                          "HORA",
+                          style: TextStyle(
+                              color: theme.secondaryHeaderColor,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                        )),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(40)),
-                            color: theme.primaryColor)
-                    ),
-
-                        
+                            borderRadius:
+                                const BorderRadius.vertical(top: Radius.circular(40)),
+                            color: theme.primaryColor)),
                   ],
                 ),
               )
