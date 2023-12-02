@@ -63,7 +63,7 @@ class _ComportamientoAlumnoScreenState
                             color: theme.primaryColor),
                         child: Center(
                             child: Text(
-                          "FECHA",
+                          " 📆 FECHA 📆 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
                               fontSize: 20,
@@ -77,7 +77,7 @@ class _ComportamientoAlumnoScreenState
                     Row(mainAxisAlignment: MainAxisAlignment.center, 
                     children: [
                       Text(
-                        "Fecha Seleccionada: ${valueFormat.format(dateTime)}",
+                        "📆 Fecha Seleccionada: ${valueFormat.format(dateTime)}",
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -138,7 +138,7 @@ class _ComportamientoAlumnoScreenState
                             color: theme.primaryColor),
                         child: Center(
                             child: Text(
-                          "HORA",
+                          " 🕘 HORA 🕘 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
                               fontSize: 20,
@@ -149,50 +149,50 @@ class _ComportamientoAlumnoScreenState
                     // --- SECCION EXPANDIBLE CON LAS HORAS ---
                     ExpansionTile(
                       title: Text(
-                        "Seleccionar Hora : ($currentHour)",
+                        "Seleccionar Hora : 🕘 $currentHour 🕘 ",
                         style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                       ),
                       children: [
                         //TODO: Colocar las horas mediante servicio
-                        RadioListTile(title: currentHour == hourList[0] ? Text(hourList[0],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[0])
+                        RadioListTile(title: currentHour == hourList[0] ? Text("${hourList[0]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[0])
                         ,value: hourList[0], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
                           });
                         },),
-                        RadioListTile(title: currentHour == hourList[1] ? Text(hourList[1],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[1])
+                        RadioListTile(title: currentHour == hourList[1] ? Text("${hourList[1]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[1])
                         ,value: hourList[1], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
                           });
                         },),
-                        RadioListTile(title: currentHour == hourList[2] ? Text(hourList[2],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[2])
+                        RadioListTile(title: currentHour == hourList[2] ? Text("${hourList[2]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[2])
                         ,value: hourList[2], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
                           });
                         },),
-                        RadioListTile(title: currentHour == hourList[3] ? Text(hourList[3],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[3])
+                        RadioListTile(title: currentHour == hourList[3] ? Text("${hourList[3]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[3])
                         ,value: hourList[3], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
                           });
                         },),
-                        RadioListTile(title: currentHour == hourList[4] ? Text(hourList[4],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[4])
+                        RadioListTile(title: currentHour == hourList[4] ? Text("${hourList[4]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[4])
                         ,value: hourList[4], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
                           });
                         },),
-                        RadioListTile(title: currentHour == hourList[5] ? Text(hourList[5],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[5])
+                        RadioListTile(title: currentHour == hourList[5] ? Text("${hourList[5]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[5])
                         ,value: hourList[5], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
                           });
                         },),
-                        RadioListTile(title: currentHour == hourList[6] ? Text(hourList[6],style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[6])
+                        RadioListTile(title: currentHour == hourList[6] ? Text("${hourList[6]}    👈 ",style: const TextStyle(fontSize: 20,color: Color.fromARGB(255, 0, 83, 3),fontWeight: FontWeight.bold),):Text(hourList[6])
                         ,value: hourList[6], groupValue: currentHour, onChanged: (value) {
                           setState(() {
                              currentHour = value.toString();
