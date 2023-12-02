@@ -18,7 +18,7 @@ class _ComportamientoAlumnoScreenState
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds:100),() {
+    Future.delayed(const Duration(milliseconds:1),() {
       setState(() {
               initAnimation=true;
       });
@@ -53,11 +53,11 @@ class _ComportamientoAlumnoScreenState
                 height: screenSize.height * 0.05,
               ),
 
-              // --- CONTAINER PRINCIPAL DE FECHA, LIMITADO AL 90% DEL ANCHO DE PANTALLA ---
+              // --- CONTAINER PRINCIPAL DE FECHA, LIMITADO AL 95% DEL ANCHO DE PANTALLA ---
               AnimatedContainer(
                 duration: Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.9:0,
-                curve: Curves.slowMiddle,
+                width: initAnimation ? screenSize.width * 0.95:200,
+                curve: Curves.linear,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
                     color: theme.secondaryHeaderColor),
@@ -86,7 +86,7 @@ class _ComportamientoAlumnoScreenState
                     createVerticalSeparator(15),
 
                     // --- ROW CON FECHA SELECCIONADA Y BOTON PARA CAMBIAR FECHA ---
-                    Row(mainAxisAlignment: MainAxisAlignment.center, 
+                    Column(mainAxisAlignment: MainAxisAlignment.center, 
                     children: [
                       Text(
                         "📆 Fecha Seleccionada: ${valueFormat.format(dateTime)}",
@@ -130,10 +130,10 @@ class _ComportamientoAlumnoScreenState
               // --- SEPARADOR ENTRE FECHA Y HORA ---
               createVerticalSeparator(20),
 
-              // --- CONTENEDOR PRINCIPAL DE FECHA ---
+              // --- CONTENEDOR PRINCIPAL DE HORA 95% DEL ANCHO ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 700),
-                width: initAnimation ? screenSize.width * 0.9:0,
+                duration: const Duration(milliseconds: 500),
+                width: initAnimation ? screenSize.width * 0.95:200,
                 curve: Curves.slowMiddle,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -165,7 +165,7 @@ class _ComportamientoAlumnoScreenState
                       title: Text(
                         "Seleccionar Hora : 🕘 $currentHour 🕘 ",
                         style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold),
                       ),
                       children: [
