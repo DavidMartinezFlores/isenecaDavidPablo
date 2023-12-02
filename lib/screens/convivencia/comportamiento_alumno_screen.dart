@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-var hourList = ["Primera Hora","Segunda Hora","Tercera Hora","Recreo","Cuarta Hora","Quinta Hora","Sexta Hora",];
+List<String> hourList = ["Primera Hora","Segunda Hora","Tercera Hora","Recreo","Cuarta Hora","Quinta Hora","Sexta Hora",];
 
 class ComportamientoAlumnoScreen extends StatefulWidget {
   const ComportamientoAlumnoScreen({super.key});
-  
 
   @override
   State<ComportamientoAlumnoScreen> createState() =>
@@ -15,9 +14,20 @@ class ComportamientoAlumnoScreen extends StatefulWidget {
 
 class _ComportamientoAlumnoScreenState
     extends State<ComportamientoAlumnoScreen> {
+  bool initAnimation = false;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds:100),() {
+      setState(() {
+              initAnimation=true;
+      });
+    },);
+    
+  }
       
-  var dateTime = DateTime.now();
-  var currentHour = hourList[0];
+  DateTime dateTime = DateTime.now();
+  String currentHour = hourList[0];
   @override
   Widget build(BuildContext context) {
 
@@ -44,8 +54,10 @@ class _ComportamientoAlumnoScreenState
               ),
 
               // --- CONTAINER PRINCIPAL DE FECHA, LIMITADO AL 90% DEL ANCHO DE PANTALLA ---
-              Container(
-                width: screenSize.width * 0.9,
+              AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                width: initAnimation ? screenSize.width * 0.9:0,
+                curve: Curves.slowMiddle,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
                     color: theme.secondaryHeaderColor),
@@ -119,8 +131,10 @@ class _ComportamientoAlumnoScreenState
               createVerticalSeparator(20),
 
               // --- CONTENEDOR PRINCIPAL DE FECHA ---
-              Container(
-                width: screenSize.width * 0.9,
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 700),
+                width: initAnimation ? screenSize.width * 0.9:0,
+                curve: Curves.slowMiddle,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
                     color: theme.secondaryHeaderColor),
