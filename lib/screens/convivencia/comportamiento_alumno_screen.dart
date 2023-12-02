@@ -93,10 +93,8 @@ class _ComportamientoAlumnoScreenState
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-
+                      createVerticalSeparator(10),
+        
                       // --- BOTON CAMBIAR FECHA ---
                       FilledButton.icon(
                         onPressed: () {
@@ -121,6 +119,7 @@ class _ComportamientoAlumnoScreenState
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                       ),
+                      createVerticalSeparator(10),
                       
                     ]),
                   ],
