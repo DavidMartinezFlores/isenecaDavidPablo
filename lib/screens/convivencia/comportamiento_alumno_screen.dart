@@ -83,6 +83,9 @@ class _ComportamientoAlumnoScreenState
   final GlobalKey<FormFieldState> _keyProfessor = GlobalKey();
   final GlobalKey<FormFieldState> _keyAlumn = GlobalKey();
   final GlobalKey<FormFieldState> _keyPoints = GlobalKey();
+  String currentProfessor = "";
+  String currentAlumn = "";
+  String currentPoints = "";
   @override
   Widget build(BuildContext context) {
     final boxShadowList = [
@@ -127,9 +130,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTAINER PRINCIPAL DE FECHA, LIMITADO AL 95% DEL ANCHO DE PANTALLA ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -172,19 +175,26 @@ class _ComportamientoAlumnoScreenState
                           // --- BOTON CAMBIAR FECHA ---
                           FilledButton.icon(
                             onPressed: () {
+                              Container();
                               showCupertinoModalPopup(
+                                  barrierColor: theme.secondaryHeaderColor.withOpacity(0.3),
                                   context: context,
-                                  builder: (context) => CupertinoDatePicker(
-                                        backgroundColor:
-                                            theme.secondaryHeaderColor,
-                                        mode: CupertinoDatePickerMode.date,
-                                        initialDateTime: DateTime.now(),
-                                        onDateTimeChanged: (value) {
-                                          setState(() {
-                                            dateTime = value;
-                                          });
-                                        },
-                                      ));
+                                  builder: (context) => Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(Radius.circular(40)),
+                                      color: theme.secondaryHeaderColor.withOpacity(0.9)
+                                    ),
+                                    height: screenSize.height*0.5,
+                                    child: CupertinoDatePicker(
+                                          mode: CupertinoDatePickerMode.date,
+                                          initialDateTime: DateTime.now(),
+                                          onDateTimeChanged: (value) {
+                                            setState(() {
+                                              dateTime = value;
+                                            });
+                                          },
+                                        ),
+                                  ));
                             },
                             icon: const Icon(Icons.calendar_month),
                             label: const Text(
@@ -204,9 +214,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR PRINCIPAL DE HORA 95% DEL ANCHO ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.slowMiddle,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -378,9 +388,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE PROFESOR ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 270,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -434,7 +444,7 @@ class _ComportamientoAlumnoScreenState
                                       ))
                                   .toList(),
                               onChanged: (value) {
-                                print("$value");
+                                currentProfessor=value.toString();
                               },
                             ),
                           ),
@@ -451,9 +461,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE ALUMNO ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -507,7 +517,7 @@ class _ComportamientoAlumnoScreenState
                                       ))
                                   .toList(),
                               onChanged: (value) {
-                                print("$value");
+                                currentAlumn=value.toString();
                               },
                             ),
                           ),
@@ -524,9 +534,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE PUNTOS ACTITUD ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -580,7 +590,7 @@ class _ComportamientoAlumnoScreenState
                                       ))
                                   .toList(),
                               onChanged: (value) {
-                                print("$value");
+                                currentPoints=value.toString();
                               },
                             ),
                           ),
@@ -597,9 +607,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE PUNTOS ACTITUD ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -682,9 +692,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE HAN SIDO INFORMADOS LOS TUTORES DEL ALUMNO ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -837,9 +847,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE SE HAN ENVIADO OBSERVACIONES COMPARTIDAS AL EQ.DOCENTE Y AL TUTOR ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -955,9 +965,9 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTENEDOR DE DESCRIPCION DEL MOTIVO DE LA INCIDENCIA ---
               AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                width: initAnimation ? screenSize.width * 0.95 : 200,
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 1000),
+                width: initAnimation ? screenSize.width * 0.95 : 250,
+                curve: Curves.elasticOut,
                 decoration: BoxDecoration(
                     boxShadow: boxShadowList,
                     borderRadius: const BorderRadius.all(Radius.circular(40)),
@@ -1078,6 +1088,9 @@ class _ComportamientoAlumnoScreenState
       tutorInformationController = TextEditingController();
       descriptionController = TextEditingController();
       sharedObservationController = TextEditingController();
+      currentProfessor="";
+      currentAlumn="";
+      currentPoints="";
     });
   }
 
@@ -1089,6 +1102,9 @@ class _ComportamientoAlumnoScreenState
   printValues() {
     print(dateTime);
     print(currentHour);
+    print(currentProfessor);
+    print(currentAlumn);
+    print(currentPoints);
     print(currentDerivationValue);
     print(currentTutorInformationValue);
     print(currentSharedObservationValue);
