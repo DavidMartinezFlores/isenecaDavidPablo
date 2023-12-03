@@ -107,7 +107,7 @@ class _ComportamientoAlumnoScreenState
             child: Text(
           "👨‍🎓 COMPORTAMIENTO ALUMNO 👨‍🎓",
           style: TextStyle(
-              fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+              fontSize: 18, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
         )),
       ),
       body: SingleChildScrollView(
@@ -148,7 +148,7 @@ class _ComportamientoAlumnoScreenState
                           " 📆 FECHA 📆 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -225,7 +225,7 @@ class _ComportamientoAlumnoScreenState
                           " 🕘 HORA 🕘 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -400,7 +400,7 @@ class _ComportamientoAlumnoScreenState
                           " 👩‍🏫 PROFESOR 👩‍🏫 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -417,7 +417,7 @@ class _ComportamientoAlumnoScreenState
                             width: screenSize.width * 0.89,
                             child: DropdownButtonFormField(
                               style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(40)),
                               hint: const Text("Selecciona un Profesor    👈 ",
@@ -472,7 +472,7 @@ class _ComportamientoAlumnoScreenState
                           " 👨‍🎓 ALUMNO 👨‍🎓 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -489,7 +489,7 @@ class _ComportamientoAlumnoScreenState
                             width: screenSize.width * 0.89,
                             child: DropdownButtonFormField(
                               style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(40)),
                               hint: const Text("Selecciona un Alumno   👈 ",
@@ -544,7 +544,7 @@ class _ComportamientoAlumnoScreenState
                           " ❌ PUNTOS / ACTITUD ✔️ ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -561,7 +561,7 @@ class _ComportamientoAlumnoScreenState
                             width: screenSize.width * 0.89,
                             child: DropdownButtonFormField(
                               style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(40)),
                               hint: const Text("Selecciona Puntos   👈 ",
@@ -616,7 +616,7 @@ class _ComportamientoAlumnoScreenState
                           " 👨‍👦 DERIVACION AL AULA DE CONVIVENCIA 👨‍👦 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 17,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -633,7 +633,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${derivationValues[0]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -651,7 +651,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${derivationValues[1]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 83, 0, 25),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -701,7 +701,7 @@ class _ComportamientoAlumnoScreenState
                           " 🙋‍♂️ ¿HAN SIDO INFORMADOS LOS TUTORES DEL ALUMNO? 🙋‍♂️ ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 20,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -718,7 +718,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${tutorInformation[0]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -736,7 +736,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${tutorInformation[1]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -754,7 +754,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${tutorInformation[2]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -772,7 +772,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${tutorInformation[3]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 83, 3, 0),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -790,7 +790,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${tutorInformation[4]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -846,17 +846,17 @@ class _ComportamientoAlumnoScreenState
                     // --- CONTENEDOR PARA LA CABEZERA DE SE HAN ENVIADO OBSERVACIONES COMPARTIDAS AL EQ.DOCENTE Y AL TUTOR ---
                     Container(
                         width: double.infinity,
-                        height: 30,
+                        height: 36,
                         decoration: BoxDecoration(
                             borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(40)),
                             color: theme.primaryColor),
                         child: Center(
                             child: Text(
-                          " 📩 ¿SE HAN ENVIADO OBSERVACIONES COMPARTIDAS AL EQUIPO DOCENTE Y AL TUTOR? 📩 ",
+                          " 📩 ¿SE HAN ENVIADO OBSERVACIONES \nCOMPARTIDAS AL EQUIPO DOCENTE Y AL TUTOR? 📩 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 18,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -873,7 +873,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${sharedObservations[0]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -891,7 +891,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${sharedObservations[1]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 97, 1, 1),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -909,7 +909,7 @@ class _ComportamientoAlumnoScreenState
                                 ? Text(
                                     "${sharedObservations[2]}    👈 ",
                                     style: const TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         color: Color.fromARGB(255, 0, 83, 3),
                                         fontWeight: FontWeight.bold),
                                   )
@@ -974,7 +974,7 @@ class _ComportamientoAlumnoScreenState
                           " 📝 DESCRIPCION DEL MOTIVO DE LA INCIDENCIA 📝 ",
                           style: TextStyle(
                               color: theme.secondaryHeaderColor,
-                              fontSize: 18,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic),
                         ))),
@@ -991,6 +991,7 @@ class _ComportamientoAlumnoScreenState
                             child: TextFormField(
                               controller: descriptionController,
                               decoration: const InputDecoration(
+                                hintStyle: TextStyle(fontSize: 13),
                                 hintText: "Porfavor describe claramente el motivo de la incidencia....."
                               ),
                             ),
