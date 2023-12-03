@@ -80,6 +80,9 @@ class _ComportamientoAlumnoScreenState
   TextEditingController tutorInformationController = TextEditingController();
   TextEditingController sharedObservationController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  final GlobalKey<FormFieldState> _keyProfessor = GlobalKey();
+  final GlobalKey<FormFieldState> _keyAlumn = GlobalKey();
+  final GlobalKey<FormFieldState> _keyPoints = GlobalKey();
   @override
   Widget build(BuildContext context) {
     final boxShadowList = [
@@ -238,7 +241,6 @@ class _ComportamientoAlumnoScreenState
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       children: [
-                        //TODO: Colocar las horas mediante servicio
                         RadioListTile(
                           title: currentHour == hourList[0]
                               ? Text(
@@ -416,6 +418,7 @@ class _ComportamientoAlumnoScreenState
                           SizedBox(
                             width: screenSize.width * 0.89,
                             child: DropdownButtonFormField(
+                              key: _keyProfessor,
                               style: const TextStyle(
                                   color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                               borderRadius:
@@ -488,6 +491,7 @@ class _ComportamientoAlumnoScreenState
                           SizedBox(
                             width: screenSize.width * 0.89,
                             child: DropdownButtonFormField(
+                              key: _keyAlumn,
                               style: const TextStyle(
                                   color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                               borderRadius:
@@ -560,6 +564,7 @@ class _ComportamientoAlumnoScreenState
                           SizedBox(
                             width: screenSize.width * 0.89,
                             child: DropdownButtonFormField(
+                              key: _keyPoints,
                               style: const TextStyle(
                                   color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                               borderRadius:
@@ -1018,7 +1023,8 @@ class _ComportamientoAlumnoScreenState
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(40)),
-                        boxShadow: boxShadowList
+                        boxShadow: boxShadowList,
+                        color: Colors.green
                       ),
                       child: FilledButton(onPressed: () {
                         printValues();
@@ -1033,7 +1039,8 @@ class _ComportamientoAlumnoScreenState
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(40)),
-                        boxShadow: boxShadowList
+                        boxShadow: boxShadowList,
+                        color: Colors.red,
                       ),
                       child: FilledButton(onPressed: () {
                         resetDefaultValues();
@@ -1060,6 +1067,9 @@ class _ComportamientoAlumnoScreenState
 
   void resetDefaultValues(){
     setState(() {
+      _keyPoints.currentState!.reset();
+      _keyAlumn.currentState!.reset();
+      _keyProfessor.currentState!.reset();
       dateTime = DateTime.now();
       currentHour = hourList[0];
       currentDerivationValue = derivationValues[0];
