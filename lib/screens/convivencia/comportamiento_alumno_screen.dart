@@ -1053,7 +1053,7 @@ class _ComportamientoAlumnoScreenState
                 ),
               ),
 
-              createVerticalSeparator(410),
+              createVerticalSeparator(40),
 
 
 
