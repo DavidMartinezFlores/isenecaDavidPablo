@@ -4,6 +4,14 @@ import 'package:intl/intl.dart';
 
 List<String> hourList = ["Primera Hora","Segunda Hora","Tercera Hora","Recreo","Cuarta Hora","Quinta Hora","Sexta Hora",];
 
+
+
+List<String> professorList = ["Rafa","Paco","Manuel","Rocio","Juan","Raquel","Vicente",];
+
+List<String> alumnList = ["David","Pablo","Juan","Manuel","Javier","Alejandro","Carlos",];
+
+List<String> attitudePoints = ["-1 Gritar en el pasillo","- 25 Pelearse ","-25 Coger el Movil en clase","-75 Agredir a un Profesor","+25 Buen comportamiento","+1 Tareas realizadas","+1 Buena actitud",];
+
 class ComportamientoAlumnoScreen extends StatefulWidget {
   const ComportamientoAlumnoScreen({super.key});
 
@@ -37,7 +45,7 @@ class _ComportamientoAlumnoScreenState
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.primaryColor,
-        title: const Text("COMPORTAMIENTO_ALUMNO"),
+        title: const Center(child: Text("👨‍🎓 COMPORTAMIENTO ALUMNO 👨‍🎓",style: TextStyle(fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),)),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -55,7 +63,7 @@ class _ComportamientoAlumnoScreenState
 
               // --- CONTAINER PRINCIPAL DE FECHA, LIMITADO AL 95% DEL ANCHO DE PANTALLA ---
               AnimatedContainer(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 width: initAnimation ? screenSize.width * 0.95:200,
                 curve: Curves.linear,
                 decoration: BoxDecoration(
@@ -163,7 +171,7 @@ class _ComportamientoAlumnoScreenState
                     ExpansionTile(
                       title: Text(
                         "Seleccionar Hora : 🕘 $currentHour 🕘 ",
-                        style: TextStyle(
+                        style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                       ),
@@ -212,10 +220,257 @@ class _ComportamientoAlumnoScreenState
                           });
                         },)
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
+
+              // --- SEPARADOR ENTRE HORA Y PROFESOR ---
+              createVerticalSeparator(20),
+
+              // --- CONTENEDOR DE PROFESOR ---
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                width: initAnimation ? screenSize.width * 0.95:200,
+                curve: Curves.linear,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
+                    color: theme.secondaryHeaderColor),
+                child: 
+                // --- COLUMNA DE PROFESOR PARA HACER EL EFECTO DE CABECERA DE CONTAINER CON FONDO DE COLOR Y TEXTO ----
+                Column(
+                  children: [
+                    // --- CONTENEDOR PARA LA CABEZERA DE PROFESOR ---
+                    Container(
+                        width: double.infinity,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(40)),
+                            color: theme.primaryColor),
+                        child: Center(
+                            child: Text(
+                          " 👩‍🏫 PROFESOR 👩‍🏫 ",
+                          style: TextStyle(
+                              color: theme.secondaryHeaderColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                        ))),
+
+                    // --- ESPACIO DE 5 PX ---
+                    createVerticalSeparator(5),
+
+                    // --- COLUMNA INTERNA DE PROFESOR ---
+                    Column(mainAxisAlignment: MainAxisAlignment.center, 
+                    children: [
+                      // --- CONTENEDOR PARA LIMITAR EL ANCHO DEL DROP DOWN AL 89%
+                      SizedBox(
+                        width: screenSize.width*0.89,
+                        child: DropdownButtonFormField(
+                          style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          borderRadius: const BorderRadius.all(Radius.circular(40)),
+                          hint: const Text("Selecciona un Profesor    👈 ",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                          items: professorList.map((valueOfMap) => 
+                          DropdownMenuItem(value: valueOfMap,child: Text(valueOfMap),)).toList(),
+                          onChanged: (value) {
+                            print("$value");
+                        },),
+                      ),
+
+                      // --- ESPACIO DE 10 PX ---
+                      createVerticalSeparator(10),
+                    ]),
+                  ],
+                ),
+              ),
+
+
+              // --- SEPARADOR ENTRE PROFESOR Y ALUMNO ---
+              createVerticalSeparator(20),
+
+              // --- CONTENEDOR DE ALUMNO ---
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                width: initAnimation ? screenSize.width * 0.95:200,
+                curve: Curves.linear,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
+                    color: theme.secondaryHeaderColor),
+                child: 
+                // --- COLUMNA DE ALUMNO PARA HACER EL EFECTO DE CABECERA DE CONTAINER CON FONDO DE COLOR Y TEXTO ----
+                Column(
+                  children: [
+                    // --- CONTENEDOR PARA LA CABEZERA DE ALUMNO ---
+                    Container(
+                        width: double.infinity,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(40)),
+                            color: theme.primaryColor),
+                        child: Center(
+                            child: Text(
+                          " 👨‍🎓 ALUMNO 👨‍🎓 ",
+                          style: TextStyle(
+                              color: theme.secondaryHeaderColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                        ))),
+
+                    // --- ESPACIO DE 5 PX ---
+                    createVerticalSeparator(5),
+
+                    // --- COLUMNA INTERNA DE ALUMNO ---
+                    Column(mainAxisAlignment: MainAxisAlignment.center, 
+                    children: [
+                      // --- CONTENEDOR PARA LIMITAR EL ANCHO DEL DROP DOWN AL 89%
+                      SizedBox(
+                        width: screenSize.width*0.89,
+                        child: DropdownButtonFormField(
+                          style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          borderRadius: const BorderRadius.all(Radius.circular(40)),
+                          hint: const Text("Selecciona un Alumno   👈 ",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                          items: alumnList.map((valueOfMap) => 
+                          DropdownMenuItem(value: valueOfMap,child: Text(valueOfMap),)).toList(),
+                          onChanged: (value) {
+                            print("$value");
+                        },),
+                      ),
+
+                      // --- ESPACIO DE 10 PX ---
+                      createVerticalSeparator(10),
+                    ]),
+                  ],
+                ),
+              ),
+
+              // --- SEPARADOR ENTRE ALUMNO Y PUNTOS ACTITUD ---
+              createVerticalSeparator(20),
+
+              // --- CONTENEDOR DE PUNTOS ACTITUD ---
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                width: initAnimation ? screenSize.width * 0.95:200,
+                curve: Curves.linear,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
+                    color: theme.secondaryHeaderColor),
+                child: 
+                // --- COLUMNA DE PUNTOS / ACTITUD PARA HACER EL EFECTO DE CABECERA DE CONTAINER CON FONDO DE COLOR Y TEXTO ----
+                Column(
+                  children: [
+                    // --- CONTENEDOR PARA LA CABEZERA DE PUNTOS ACTITUD ---
+                    Container(
+                        width: double.infinity,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(40)),
+                            color: theme.primaryColor),
+                        child: Center(
+                            child: Text(
+                          " ❌ PUNTOS / ACTITUD ✔️ ",
+                          style: TextStyle(
+                              color: theme.secondaryHeaderColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                        ))),
+
+                    // --- ESPACIO DE 5 PX ---
+                    createVerticalSeparator(5),
+
+                    // --- COLUMNA INTERIOR ---
+                    Column(mainAxisAlignment: MainAxisAlignment.center, 
+                    children: [
+                      // --- CONTENEDOR PARA LIMITAR EL ANCHO DEL DROP DOWN AL 89%
+                      SizedBox(
+                        width: screenSize.width*0.89,
+                        child: DropdownButtonFormField(
+                          style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          borderRadius: const BorderRadius.all(Radius.circular(40)),
+                          hint: const Text("Selecciona Puntos   👈 ",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                          items: attitudePoints.map((valueOfMap) => 
+                          DropdownMenuItem(value: valueOfMap,child: Text(valueOfMap),)).toList(),
+                          onChanged: (value) {
+                            print("$value");
+                        },),
+                      ),
+
+                      // --- ESPACIO DE 10 PX ---
+                      createVerticalSeparator(10),
+                    ]),
+                  ],
+                ),
+              ),
+
+              // --- SEPARADOR ENTRE PUNTOS ACTITUD Y DERIVACION AL AULA DE CONVIVENCIA---
+              createVerticalSeparator(20),
+
+              // --- CONTENEDOR DE PUNTOS ACTITUD ---
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                width: initAnimation ? screenSize.width * 0.95:200,
+                curve: Curves.linear,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
+                    color: theme.secondaryHeaderColor),
+                child: 
+                // --- COLUMNA DE DERIVACION AL AULA DE CONVIVENCIA PARA HACER EL EFECTO DE CABECERA DE CONTAINER CON FONDO DE COLOR Y TEXTO ----
+                Column(
+                  children: [
+                    // --- CONTENEDOR PARA LA CABEZERA DE DERIVACION AL AULA DE CONVIVENCIA ---
+                    Container(
+                        width: double.infinity,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(40)),
+                            color: theme.primaryColor),
+                        child: Center(
+                            child: Text(
+                          " ❌ DERIVACION AL AULA DE CONVIVENCIA ✔️ ",
+                          style: TextStyle(
+                              color: theme.secondaryHeaderColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                        ))),
+
+                    // --- ESPACIO DE 5 PX ---
+                    createVerticalSeparator(5),
+
+                    // --- COLUMNA INTERIOR ---
+                    Column(mainAxisAlignment: MainAxisAlignment.center, 
+                    children: [
+                      // --- CONTENEDOR PARA LIMITAR EL ANCHO DEL DROP DOWN AL 89%
+                      SizedBox(
+                        width: screenSize.width*0.89,
+                        child: DropdownButtonFormField(
+                          style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          borderRadius: const BorderRadius.all(Radius.circular(40)),
+                          hint: const Text("Selecciona Puntos   👈 ",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                          items: attitudePoints.map((valueOfMap) => 
+                          DropdownMenuItem(value: valueOfMap,child: Text(valueOfMap),)).toList(),
+                          onChanged: (value) {
+                            print("$value");
+                        },),
+                      ),
+
+                      // --- ESPACIO DE 10 PX ---
+                      createVerticalSeparator(10),
+                    ]),
+                  ],
+                ),
+              ),
+
+
+
+
+
+
             ],
           ),
         ),
