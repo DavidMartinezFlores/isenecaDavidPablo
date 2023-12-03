@@ -84,7 +84,7 @@ class _ComportamientoAlumnoScreenState
   Widget build(BuildContext context) {
     final boxShadowList = [
       BoxShadow(
-        color: Colors.grey.withOpacity(1),
+        color: Colors.grey.withOpacity(0.5),
         offset: const Offset(
           5.0,
           5.0,
@@ -92,8 +92,8 @@ class _ComportamientoAlumnoScreenState
         blurRadius: 10.0,
         spreadRadius: 2.0,
       ), //BoxShadow
-      const BoxShadow(
-        color: Colors.white,
+       BoxShadow(
+        color: Colors.white.withOpacity(0.5),
       ), //BoxShadow
     ];
     final valueFormat = DateFormat("dd-MM-yyyy");
@@ -1003,6 +1003,49 @@ class _ComportamientoAlumnoScreenState
                   ],
                 ),
               ),
+
+
+
+              // --- ESPACIO DE 10 PX ---
+               createVerticalSeparator(30),
+
+
+              Container(
+                width: screenSize.width*0.9,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        boxShadow: boxShadowList
+                      ),
+                      child: FilledButton(onPressed: () {
+                        printValues();
+                          
+                      }, child: Text("Enviar"),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.green)
+                      ),
+                      ),
+                    ),
+                    Spacer(),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        boxShadow: boxShadowList
+                      ),
+                      child: FilledButton(onPressed: () {
+                        resetDefaultValues();
+                      }, child: Text("Borrar"),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.red)
+                      ),),
+                    )
+                  ],
+                ),
+              ),
+
               createVerticalSeparator(410),
 
 
@@ -1015,7 +1058,32 @@ class _ComportamientoAlumnoScreenState
     );
   }
 
+  void resetDefaultValues(){
+    setState(() {
+      dateTime = DateTime.now();
+      currentHour = hourList[0];
+      currentDerivationValue = derivationValues[0];
+      currentTutorInformationValue = tutorInformation[0];
+      currentSharedObservationValue = sharedObservations[0];
+      tutorInformationController = TextEditingController();
+      descriptionController = TextEditingController();
+      sharedObservationController = TextEditingController();
+    });
+  }
+
   createVerticalSeparator(cuantity) {
     return SizedBox(height: cuantity + 0.0);
   }
+  
+  
+  printValues() {
+    print(dateTime);
+    print(currentHour);
+    print(currentDerivationValue);
+    print(currentTutorInformationValue);
+    print(currentSharedObservationValue);
+    print(tutorInformationController.value.text);
+    print(sharedObservationController.value.text);
+    print(descriptionController.value.text);
+   }
 }
