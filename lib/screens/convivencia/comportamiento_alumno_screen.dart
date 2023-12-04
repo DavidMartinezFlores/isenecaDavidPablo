@@ -1,6 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:iseneca/models/alumno_convivencia.dart';
+//TODO: Implementar david forma
+crearListaCursos(List<AlumnoConvivencia>listaAlumnos)
+{
+  Set <String> cursos = {};
+
+  for (AlumnoConvivencia alumno in listaAlumnos)
+  {
+    cursos.add(alumno.curso);
+  }
+  List<String> listCourses = [...cursos];
+  listCourses.sort();
+  return listCourses;
+}
+
+List<AlumnoConvivencia> studentList = [
+  AlumnoConvivencia(nombre: "David", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Pablo", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Juan", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Javi", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Manuel", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Edu", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "Luisda", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "Omar", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "Nerea", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "David.J", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "David.J", curso: "3ESO")
+];
+
+
 
 List<String> hourList = [
   "Primera Hora",
@@ -86,6 +116,7 @@ class _ComportamientoAlumnoScreenState
   String currentProfessor = "";
   String currentAlumn = "";
   String currentPoints = "";
+  List <String> courses = crearListaCursos(studentList);
   @override
   Widget build(BuildContext context) {
     final boxShadowList = [
@@ -105,6 +136,7 @@ class _ComportamientoAlumnoScreenState
     final valueFormat = DateFormat("dd-MM-yyyy");
     final screenSize = MediaQuery.of(context).size;
     final theme = Theme.of(context);
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -500,25 +532,43 @@ class _ComportamientoAlumnoScreenState
                           // --- CONTENEDOR PARA LIMITAR EL ANCHO DEL DROP DOWN AL 89%
                           SizedBox(
                             width: screenSize.width * 0.89,
-                            child: DropdownButtonFormField(
-                              key: _keyAlumn,
-                              style: const TextStyle(
-                                  color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(40)),
-                              hint: const Text("Selecciona un Alumno   👈 ",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold)),
-                              items: alumnList
-                                  .map((valueOfMap) => DropdownMenuItem(
-                                        value: valueOfMap,
-                                        child: Text(valueOfMap),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                currentAlumn=value.toString();
-                              },
+                            child: Column(
+                              children: [
+                                const Align(alignment: Alignment.topLeft, child: Text("Todos los alumnos",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
+                                DropdownButtonFormField(
+                                  key: _keyAlumn,
+                                  style: const TextStyle(
+                                      color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(40)),
+                                  hint: const Text("Selecciona un Alumno   👈 ",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold)),
+                                  items: alumnList
+                                      .map((valueOfMap) => DropdownMenuItem(
+                                            value: valueOfMap,
+                                            child: Text(valueOfMap),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    currentAlumn=value.toString();
+                                  },
+                                ),
+                                createVerticalSeparator(20),
+                                const Align(alignment: Alignment.topLeft, child: Text("Filtrar por curso",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
+                                DropdownButtonFormField(items:courses.map((valueOfMap) => DropdownMenuItem(
+                                  value: valueOfMap,
+                                  child: Text(valueOfMap))).toList() , 
+                                  onChanged: (value){
+
+                                },
+                                hint: const Text("Selecciona un curso   👈",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                ),
+                                createVerticalSeparator(20),
+                                const Align(alignment: Alignment.topLeft, child: Text("Alumnos filtrados",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
+                                
+                              ],
                             ),
                           ),
 
