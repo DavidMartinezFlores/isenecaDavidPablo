@@ -17,9 +17,19 @@ List<AlumnoConvivencia> studentList = [
   AlumnoConvivencia(nombre: "David.J Sanchez", curso: "1DAM"),
   AlumnoConvivencia(nombre: "David.A Fernandez", curso: "3ESO"),
   AlumnoConvivencia(nombre: "David.F Sanchez", curso: "3ESO"),
-  AlumnoConvivencia(nombre: "David.H Martinez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.L Martinez", curso: "3ESO"),
   AlumnoConvivencia(nombre: "David.Y Alcalde", curso: "3ESO"),
-  AlumnoConvivencia(nombre: "David.O Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.B 1Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.C 2Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.D 3Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.E 4Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.F 5Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.G 6Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.H 7Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.I 8Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.J 9Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.K 10Fernandez", curso: "3ESO"),
+
 ];
 
 List<String> hourList = [
@@ -530,6 +540,8 @@ class _ComportamientoAlumnoScreenState
                             child: Column(
                               children: [
 
+                                // SI NO HAY CURSO SELECCIONADO , MOSTRAR LA SELECCION DE TODOS LOS ALUMNOS
+                                // SI HAY CURSO SELECCIONADO , MOSTRAR FILTRO POR CURSO
                                 currentCourse=="" ? Column(
                                   children: [
                                     const Align(alignment: Alignment.topLeft, child: Text("Todos los alumnos",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
@@ -557,12 +569,12 @@ class _ComportamientoAlumnoScreenState
                                       },
                                     ),
                                   ],
-                                ):Text(""),
+                                ):const Text(""),
 
 
                                 createVerticalSeparator(20),
 
-
+                                // FILTRO POR CURSOS
                                 const Align(alignment: Alignment.topLeft, child: Text("Filtrar por curso",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
                                 DropdownButtonFormField(
                                   key: _keyCourseFilter,
@@ -589,12 +601,15 @@ class _ComportamientoAlumnoScreenState
 
 
                                 createVerticalSeparator(20),
-                                currentCourse==""? Text(""):
+
+                                // SI NO HAY CURSO , NADA (TEXT VACIO)
+                                // SI HAY CRUSO , MOSTRAR LOS TEXTOS PARA LOS FILTROS
+                                currentCourse==""? const Text(""):
                                 Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: theme.primaryColor,
-                                    borderRadius: BorderRadius.all(const Radius.circular(40))
+                                    borderRadius: const BorderRadius.all(Radius.circular(40))
                                   ),
                                   child: Center(
                                     child: Column(
@@ -603,30 +618,37 @@ class _ComportamientoAlumnoScreenState
                                           child: Text(" ⚠️  Alumnos filtrados ⚠️ ",
                                             style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: theme.secondaryHeaderColor),),
                                         ),
-                                        Text("\nSeleccionado: ${currentAlumn.nombre} ${currentAlumn.curso }",style: TextStyle(color: theme.secondaryHeaderColor,fontSize: 18,fontWeight: FontWeight.bold),)
+                                        Text("\nSeleccionado: ${currentAlumn.nombre} ${currentAlumn.curso }",style: TextStyle(color: theme.secondaryHeaderColor,fontSize: 14,fontWeight: FontWeight.bold),)
                                       ],
                                     ),
                                   ),
                                 ),
 
-                                currentCourse=="" ? Text(""):
+                                // SI NO HAY CURSO , NADA (TEXT VACIO)
+                                // SI HAY CRUSO , MOSTRAR EL BOTON DE LIMPIAR FILTRO Y LA LISTVIEW CON LOS ALUMNOS DE ESE CURSO
+                                currentCourse=="" ? const Text(""):
                                 Column(
                                   children: [
                                     createVerticalSeparator(10),
                                     Align(
-                                      alignment: Alignment.topLeft,
+                                      alignment: Alignment.topCenter,
                                       child: FilledButton(onPressed: () {
                                         setState(() {
                                           currentCourse="";
                                           _keyCourseFilter.currentState!.reset();
                                         });
-                                      }, child: Text("Limpiar filtro")),
+                                      }, child: const Text("Limpiar filtro")),
                                     ),
                                   ],
                                 ),
                                 Container(
+                                  // SI HAY CURSO PONER ALTURA 300 , SI NO HAY PONER 0
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 165, 219, 248).withOpacity(0.5),
+                                    borderRadius: BorderRadius.all(Radius.circular(15))
+                                  ),
                                   height: currentCourse == "" ? 0: 300,
-                                  child: currentCourse == "" ? Text("")
+                                  child: currentCourse == "" ? const Text("")
                                   :ListView.builder(
                                     controller: scrollController,
                                     itemCount: getFilterAlumnList(studentList,currentCourse).length,
@@ -637,6 +659,7 @@ class _ComportamientoAlumnoScreenState
                                           Align(
                                             alignment: Alignment.topLeft,
                                             
+                                            // SACAMOS EL ALUMNO SELECCIONADO CON GESTURE DETECTOR
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
@@ -645,10 +668,13 @@ class _ComportamientoAlumnoScreenState
                                                },
                                               child: MouseRegion(
                                                 cursor: SystemMouseCursors.click,
-                                                child: currentAlumn.nombre== getFilterAlumnList(studentList,currentCourse)[index].nombre &&
+                                                child:
+                                                // SI EL ALUMNO ESTA SELECCIONADO (POR NOMBRE Y CURSO) SE RETALTARA EL TEXTO
+                                                // DE LO CONTRARIO TEXTO SIN RESALTAR
+                                                currentAlumn.nombre== getFilterAlumnList(studentList,currentCourse)[index].nombre &&
                                                 currentAlumn.curso== getFilterAlumnList(studentList,currentCourse)[index].curso
-                                                ? Text("📌 "+getFilterAlumnList(studentList,currentCourse)[index].nombre+", "+getFilterAlumnList(studentList,currentCourse)[index].curso+" "+onSelectThings,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 0, 124, 4)),)
-                                                :Text("🎯 "+getFilterAlumnList(studentList,currentCourse)[index].nombre+", "+getFilterAlumnList(studentList,currentCourse)[index].curso,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                                ? Center(child: Text("📌 ${getFilterAlumnList(studentList,currentCourse)[index].nombre}, ${getFilterAlumnList(studentList,currentCourse)[index].curso} $onSelectThings",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 0, 124, 4)),))
+                                                :Center(child: Text("🎯 ${getFilterAlumnList(studentList,currentCourse)[index].nombre}, ${getFilterAlumnList(studentList,currentCourse)[index].curso}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold),)),
                                               )
                                              )),
                                         ],
@@ -1005,15 +1031,28 @@ class _ComportamientoAlumnoScreenState
                             borderRadius: const BorderRadius.vertical(
                                 top: Radius.circular(40)),
                             color: theme.primaryColor),
-                        child: Center(
-                            child: Text(
-                          " 📩 ¿SE HAN ENVIADO OBSERVACIONES \nCOMPARTIDAS AL EQUIPO DOCENTE Y AL TUTOR? 📩 ",
-                          style: TextStyle(
-                              color: theme.secondaryHeaderColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic),
-                        ))),
+                        child: Column(
+                          children: [
+                            Center(
+                                child: Text(
+                              " 📩 ¿SE HAN ENVIADO OBSERVACIONES ",
+                              style: TextStyle(
+                                  color: theme.secondaryHeaderColor,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic),
+                            )),
+                            Center(
+                                child: Text(
+                              "COMPARTIDAS AL EQUIPO DOCENTE Y AL TUTOR? 📩 ",
+                              style: TextStyle(
+                                  color: theme.secondaryHeaderColor,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic),
+                            )),
+                          ],
+                        )),
 
                     // --- ESPACIO DE 5 PX ---
                     createVerticalSeparator(5),
@@ -1164,39 +1203,39 @@ class _ComportamientoAlumnoScreenState
                createVerticalSeparator(30),
 
 
-              Container(
+              SizedBox(
                 width: screenSize.width*0.9,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        borderRadius: const BorderRadius.all(Radius.circular(40)),
                         boxShadow: boxShadowList,
                         color: Colors.green
                       ),
                       child: FilledButton(onPressed: () {
                         printValues();
                           
-                      }, child: Text("Enviar"),
-                      style: ButtonStyle(
+                      },
+                      style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.green)
-                      ),
+                      ), child: const Text("Enviar"),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        borderRadius: const BorderRadius.all(Radius.circular(40)),
                         boxShadow: boxShadowList,
                         color: Colors.red,
                       ),
                       child: FilledButton(onPressed: () {
                         resetDefaultValues();
-                      }, child: Text("Borrar"),
-                      style: ButtonStyle(
+                      },
+                      style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.red)
-                      ),),
+                      ), child: const Text("Borrar"),),
                     )
                   ],
                 ),
