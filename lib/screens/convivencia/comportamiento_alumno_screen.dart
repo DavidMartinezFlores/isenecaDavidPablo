@@ -2,35 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:iseneca/models/alumno_convivencia.dart';
-//TODO: Implementar david forma
-crearListaCursos(List<AlumnoConvivencia>listaAlumnos)
-{
-  Set <String> cursos = {};
 
-  for (AlumnoConvivencia alumno in listaAlumnos)
-  {
-    cursos.add(alumno.curso);
-  }
-  List<String> listCourses = [...cursos];
-  listCourses.sort();
-  return listCourses;
-}
 
 List<AlumnoConvivencia> studentList = [
-  AlumnoConvivencia(nombre: "David", curso: "2DAM"),
-  AlumnoConvivencia(nombre: "Pablo", curso: "2DAM"),
-  AlumnoConvivencia(nombre: "Juan", curso: "2DAM"),
-  AlumnoConvivencia(nombre: "Javi", curso: "2DAM"),
-  AlumnoConvivencia(nombre: "Manuel", curso: "2DAM"),
-  AlumnoConvivencia(nombre: "Edu", curso: "1DAM"),
-  AlumnoConvivencia(nombre: "Luisda", curso: "1DAM"),
-  AlumnoConvivencia(nombre: "Omar", curso: "1DAM"),
-  AlumnoConvivencia(nombre: "Nerea", curso: "1DAM"),
-  AlumnoConvivencia(nombre: "David.J", curso: "1DAM"),
-  AlumnoConvivencia(nombre: "David.J", curso: "3ESO")
+  AlumnoConvivencia(nombre: "David Martinez", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Pablo Fernandez", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Juan Fernandez", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Javi Sanchez", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Manuel Sanchez", curso: "2DAM"),
+  AlumnoConvivencia(nombre: "Edu Martinez", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "Luisda Sanchez", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "Omar Martinez", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "Nerea Fernandez", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "David.J Sanchez", curso: "1DAM"),
+  AlumnoConvivencia(nombre: "David.A Fernandez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.F Sanchez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.H Martinez", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.Y Alcalde", curso: "3ESO"),
+  AlumnoConvivencia(nombre: "David.O Fernandez", curso: "3ESO"),
 ];
-
-
 
 List<String> hourList = [
   "Primera Hora",
@@ -87,7 +77,8 @@ class ComportamientoAlumnoScreen extends StatefulWidget {
 }
 
 class _ComportamientoAlumnoScreenState
-    extends State<ComportamientoAlumnoScreen> {
+  extends State<ComportamientoAlumnoScreen> {
+    
   bool initAnimation = false;
   @override
   void initState() {
@@ -110,15 +101,19 @@ class _ComportamientoAlumnoScreenState
   TextEditingController tutorInformationController = TextEditingController();
   TextEditingController sharedObservationController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  ScrollController scrollController = ScrollController();
   final GlobalKey<FormFieldState> _keyProfessor = GlobalKey();
   final GlobalKey<FormFieldState> _keyAlumn = GlobalKey();
   final GlobalKey<FormFieldState> _keyPoints = GlobalKey();
+  final GlobalKey<FormFieldState> _keyCourseFilter = GlobalKey();
   String currentProfessor = "";
-  String currentAlumn = "";
+  AlumnoConvivencia currentAlumn = AlumnoConvivencia(nombre: "", curso: "");
   String currentPoints = "";
-  List <String> courses = crearListaCursos(studentList);
+  String currentCourse = "";
+  String onSelectThings ="👈";
   @override
   Widget build(BuildContext context) {
+    List <String> courses = getCourseList(studentList);
     final boxShadowList = [
       BoxShadow(
         color: Colors.grey.withOpacity(0.5),
@@ -534,39 +529,133 @@ class _ComportamientoAlumnoScreenState
                             width: screenSize.width * 0.89,
                             child: Column(
                               children: [
-                                const Align(alignment: Alignment.topLeft, child: Text("Todos los alumnos",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
+
+                                currentCourse=="" ? Column(
+                                  children: [
+                                    const Align(alignment: Alignment.topLeft, child: Text("Todos los alumnos",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
+
+                                    DropdownButtonFormField(
+                                      key: _keyAlumn,
+                                      style: const TextStyle(
+                                          color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
+                                      borderRadius:
+                                          const BorderRadius.all(Radius.circular(40)),
+                                      hint: const Text("Selecciona un Alumno   👈 ",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold)),
+                                      items: studentList
+                                          .map((valueOfMap) => DropdownMenuItem(
+                                                value: valueOfMap,
+                                                child: Text("${valueOfMap.nombre} ${valueOfMap.curso}"),
+                                              ))
+                                          .toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          currentAlumn=value!;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ):Text(""),
+
+
+                                createVerticalSeparator(20),
+
+
+                                const Align(alignment: Alignment.topLeft, child: Text("Filtrar por curso",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
                                 DropdownButtonFormField(
-                                  key: _keyAlumn,
+                                  key: _keyCourseFilter,
                                   style: const TextStyle(
                                       color:Colors.black,fontSize: 15, fontWeight: FontWeight.bold),
                                   borderRadius:
                                       const BorderRadius.all(Radius.circular(40)),
-                                  hint: const Text("Selecciona un Alumno   👈 ",
+                                  hint: const Text("Selecciona un Curso   👈 ",
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold)),
-                                  items: alumnList
+                                  items: courses
                                       .map((valueOfMap) => DropdownMenuItem(
                                             value: valueOfMap,
-                                            child: Text(valueOfMap),
+                                            child: Text(valueOfMap.toString()),
                                           ))
                                       .toList(),
                                   onChanged: (value) {
-                                    currentAlumn=value.toString();
+                                    setState(() {
+                                      currentCourse=value.toString();
+                                    });
                                   },
                                 ),
-                                createVerticalSeparator(20),
-                                const Align(alignment: Alignment.topLeft, child: Text("Filtrar por curso",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
-                                DropdownButtonFormField(items:courses.map((valueOfMap) => DropdownMenuItem(
-                                  value: valueOfMap,
-                                  child: Text(valueOfMap))).toList() , 
-                                  onChanged: (value){
 
-                                },
-                                hint: const Text("Selecciona un curso   👈",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                                ),
+
                                 createVerticalSeparator(20),
-                                const Align(alignment: Alignment.topLeft, child: Text("Alumnos filtrados",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),)),
+                                currentCourse==""? Text(""):
+                                Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: theme.primaryColor,
+                                    borderRadius: BorderRadius.all(const Radius.circular(40))
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Center(
+                                          child: Text(" ⚠️  Alumnos filtrados ⚠️ ",
+                                            style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: theme.secondaryHeaderColor),),
+                                        ),
+                                        Text("\nSeleccionado: ${currentAlumn.nombre} ${currentAlumn.curso }",style: TextStyle(color: theme.secondaryHeaderColor,fontSize: 18,fontWeight: FontWeight.bold),)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                currentCourse=="" ? Text(""):
+                                Column(
+                                  children: [
+                                    createVerticalSeparator(10),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: FilledButton(onPressed: () {
+                                        setState(() {
+                                          currentCourse="";
+                                          _keyCourseFilter.currentState!.reset();
+                                        });
+                                      }, child: Text("Limpiar filtro")),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: currentCourse == "" ? 0: 300,
+                                  child: currentCourse == "" ? Text("")
+                                  :ListView.builder(
+                                    controller: scrollController,
+                                    itemCount: getFilterAlumnList(studentList,currentCourse).length,
+                                    itemBuilder:(context, index) {
+                                      return Column(
+                                        children: [
+                                          createVerticalSeparator(15),
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                   currentAlumn= AlumnoConvivencia(nombre: getFilterAlumnList(studentList,currentCourse)[index].nombre, curso: getFilterAlumnList(studentList,currentCourse)[index].curso);
+                                                });
+                                               },
+                                              child: MouseRegion(
+                                                cursor: SystemMouseCursors.click,
+                                                child: currentAlumn.nombre== getFilterAlumnList(studentList,currentCourse)[index].nombre &&
+                                                currentAlumn.curso== getFilterAlumnList(studentList,currentCourse)[index].curso
+                                                ? Text("📌 "+getFilterAlumnList(studentList,currentCourse)[index].nombre+", "+getFilterAlumnList(studentList,currentCourse)[index].curso+" "+onSelectThings,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 0, 124, 4)),)
+                                                :Text("🎯 "+getFilterAlumnList(studentList,currentCourse)[index].nombre+", "+getFilterAlumnList(studentList,currentCourse)[index].curso,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                              )
+                                             )),
+                                        ],
+                                      );
+                                },) ,
+                                ),
+                                
                                 
                               ],
                             ),
@@ -1123,13 +1212,17 @@ class _ComportamientoAlumnoScreenState
         ),
       ),
     );
+    
   }
-
   void resetDefaultValues(){
     setState(() {
       _keyPoints.currentState!.reset();
-      _keyAlumn.currentState!.reset();
+      if(currentCourse==""){
+        _keyAlumn.currentState!.reset();
+      }
+      currentCourse= "";
       _keyProfessor.currentState!.reset();
+      _keyCourseFilter.currentState!.reset();
       dateTime = DateTime.now();
       currentHour = hourList[0];
       currentDerivationValue = derivationValues[0];
@@ -1139,9 +1232,35 @@ class _ComportamientoAlumnoScreenState
       descriptionController = TextEditingController();
       sharedObservationController = TextEditingController();
       currentProfessor="";
-      currentAlumn="";
+      currentAlumn= AlumnoConvivencia(nombre: "", curso: "");
       currentPoints="";
+      
     });
+  }
+  List<AlumnoConvivencia> getFilterAlumnList(List<AlumnoConvivencia>alumnList,String currentCourse){
+
+    List<AlumnoConvivencia> filterAlumnList=[];
+
+    for (AlumnoConvivencia alumn in alumnList)
+    {
+      if(alumn.curso==currentCourse)
+      {
+        filterAlumnList.add(alumn);
+      }
+    }
+    return filterAlumnList;
+  }
+
+  List<String> getCourseList(List<AlumnoConvivencia>listaAlumnos){
+    Set <String> cursos = {};
+
+    for (AlumnoConvivencia alumno in listaAlumnos)
+    {
+      cursos.add(alumno.curso);
+    }
+    List<String> listCourses = [...cursos];
+    listCourses.sort();
+    return listCourses;
   }
 
   createVerticalSeparator(cuantity) {
@@ -1153,7 +1272,7 @@ class _ComportamientoAlumnoScreenState
     print(dateTime);
     print(currentHour);
     print(currentProfessor);
-    print(currentAlumn);
+    print(currentAlumn.nombre+" "+currentAlumn.curso);
     print(currentPoints);
     print(currentDerivationValue);
     print(currentTutorInformationValue);
@@ -1162,4 +1281,5 @@ class _ComportamientoAlumnoScreenState
     print(sharedObservationController.value.text);
     print(descriptionController.value.text);
    }
+   
 }
