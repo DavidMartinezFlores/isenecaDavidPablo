@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iseneca/firebase_options.dart';
+import 'package:iseneca/providers/expulsados_provider.dart';
 import 'package:iseneca/providers/providers.dart';
+import 'package:iseneca/screens/convivencia/carnet_screen.dart';
 import 'package:iseneca/screens/convivencia/comportamiento_alumno_screen.dart';
+import 'package:iseneca/screens/convivencia/incidencia_telefono_screen.dart';
+import 'package:iseneca/screens/convivencia/screen_expulsados.dart';
 import 'package:iseneca/screens/screens.dart';
 import 'package:iseneca/service/services.dart';
 import 'package:provider/provider.dart';
+import 'package:iseneca/screens/convivencia/reflexion_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +67,10 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => DaceProvider(),
           lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ExpulsadosProvider(),
+          lazy: false,
         )
       ],
       child: const MyApp(),
@@ -81,7 +91,8 @@ class MyApp extends StatelessWidget {
         "/": (BuildContext context) => const LoginScreen(),
         "home_screen": (BuildContext context) => const HomeScreen(),
         "main_screen": (BuildContext context) => const MainScreen(),
-        "convivencia_screen": (BuildContext context) => const ConvivenciaScreen(),
+        "convivencia_screen": (BuildContext context) =>
+            const ConvivenciaScreen(),
         "expulsados_screen": (BuildContext context) => const ExpulsadosScreen(),
         "mayores_screen": (BuildContext context) => const MayoresScreen(),
         "dace_screen": (BuildContext context) => const DaceScreen(),
@@ -106,7 +117,8 @@ class MyApp extends StatelessWidget {
         "contacto_detalles_alumnado_screen": (BuildContext context) =>
             const ContactoDetallesAlumnadoScreen(),
         "servicio_screen": (BuildContext context) => const ServicioScreen(),
-        "servicio_es_screen": (BuildContext context) => const ServicioESScreen(),
+        "servicio_es_screen": (BuildContext context) =>
+            const ServicioESScreen(),
         "servicio_es_alumnos_screen": (BuildContext context) =>
             const ServicioESAlumnosScreen(),
         "servicio_informes_screen": (BuildContext context) =>
@@ -115,6 +127,10 @@ class MyApp extends StatelessWidget {
             const ServicioInformesDetallesScreen(),
         "comportamiento_alumno_screen": (BuildContext context) =>
             const ComportamientoAlumnoScreen(),
+        "reflexion_screen": (BuildContext context) => const ReflexionScreen(),
+        "carnet_screen": (BuildContext context) => const CardScreen(),
+        "incidencia_telefono_screen": (BuildContext context) => const IncidenciaTelefonoScreen(),
+        "screen_expulsados": (BuildContext context) => const ScreenExpulsados(),
       },
     );
   }
